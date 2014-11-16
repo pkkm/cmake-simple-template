@@ -2,7 +2,7 @@
 
 RUN_PROGRAM_COMMAND = "./bin/myproject"
 BUILD_DIR = build
-# Can't contain special characters or have the same name as one of the rules in this file.
+# NOTE: $(BUILD_DIR) must not have the same name as another rule in this file.
 
 default: make
 
