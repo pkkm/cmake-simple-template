@@ -9,6 +9,8 @@ set (PROJECT_VERSION_MINOR 1)
 set (PROJECT_VERSION_PATCH 0)
 
 set (CMAKE_BUILD_TYPE RelWithDebInfo) # Debug, RelWithDebInfo, Release.
+set (CMAKE_VERBOSE_MAKEFILE TRUE)
+
 set (CMAKE_RUNTIME_OUTPUT_DIRECTORY "${PROJECT_BINARY_DIR}/bin")
 
 add_subdirectory ("src")
