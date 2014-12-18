@@ -1,6 +1,8 @@
 # This makefile just calls the CMake build system.
 
-RUN_PROGRAM_COMMAND = "./bin/myproject"
+RUN_DIR = build/bin
+RUN_COMMAND = "./myproject"
+
 BUILD_DIR = build
 # NOTE: $(BUILD_DIR) must not have the same name as another rule in this file.
 
@@ -21,7 +23,7 @@ $(BUILD_DIR):
 # Run the program.
 .PHONY: run
 run:
-	cd "$(BUILD_DIR)"; $(RUN_PROGRAM_COMMAND)
+	cd "$(RUN_DIR)"; $(RUN_COMMAND)
 
 # Compile and run.
 .PHONY: compile-run
