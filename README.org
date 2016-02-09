@@ -3,6 +3,5 @@
 
 ** Usage
   - =make= :: If the =build= directory exists, run =make= there to recompile the program. If it doesn't, create it, generate a Makefile using CMake and compile the program using =make=.
-  - =make compile-run= :: Build (like the above) and run the program.
   - =make run= :: Run the program.
   - =make clean= :: Delete the =build= directory.

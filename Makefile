@@ -1,35 +1,23 @@
-# This makefile just calls the CMake build system.
-
-RUN_DIR = build/bin
-RUN_COMMAND = "./myproject"
+# This file just launches CMake and/or Make.
+# NOTE: each command that's on a separate line runs in its own shell.
 
 BUILD_DIR = build
-# NOTE: $(BUILD_DIR) must not have the same name as another rule in this file.
+RUN_COMMAND = "./src/myproject"
 
-default: make
+MAKE = make
+CMAKE = cmake
 
-# Build the project (if $(BUILD_DIR) exists, assume that CMake has been run and run only make).
-.PHONY: make
-make:
-	cd "$(BUILD_DIR)"; make
-# This needs to be on one line, otherwise the commands would run in separate subshells.
+default:
+ifneq ("$(wildcard $(BUILD_DIR))","") # If $(BUILD_DIR) exists...
+	cd "$(BUILD_DIR)" && $(MAKE)
+else
+	mkdir "$(BUILD_DIR)" && cd "$(BUILD_DIR)" && $(CMAKE) .. && $(MAKE)
+endif
 
-# If $(BUILD_DIR) doesn't exist, create it and run CMake.
-make: | $(BUILD_DIR)
-$(BUILD_DIR):
-	mkdir "$(BUILD_DIR)"
-	cd "$(BUILD_DIR)"; cmake ..
-
-# Run the program.
 .PHONY: run
 run:
-	cd "$(RUN_DIR)"; $(RUN_COMMAND)
+	cd "$(BUILD_DIR)" && $(RUN_COMMAND)
 
-# Compile and run.
-.PHONY: compile-run
-compile-run: make run
-
-# Remove $(BUILD_DIR).
 .PHONY: clean
 clean:
-	rm -rf "$(BUILD_DIR)"
+	rm -r "$(BUILD_DIR)"
