@@ -1,11 +1,12 @@
-* CMake template for a simple application
+* Template for a simple application built with CMake
 
 The Makefile in the top-level directory is just a wrapper that runs CMake or Make as appropriate.
 
 ** Usage
 
-Replace =myproject= with the name of your project in =CMakeLists.txt= and =Makefile=. Then, use the following commands:
+Replace =myproject= with the name of your project in =CMakeLists.txt= and =Makefile=. Then use the following commands:
 
-- =make= :: If the =build= directory exists, run =make= there to recompile the program. If it doesn't, create it, generate a Makefile using CMake and compile the program using =make=.
+- =make= :: Ensure the =build= directory exists; run =cmake= and =make= there.
 - =make run= :: Run the program.
+- =make test= :: Run tests.
 - =make clean= :: Delete the =build= directory.

@@ -1,10 +1,5 @@
-# Main binary.
-set (binary_name "${PROJECT_NAME}")
-add_executable ("${binary_name}" main.cpp)
+set(binary_name "${PROJECT_NAME}")
+add_executable("${binary_name}" main.c)
 
-# Compilation flags.
-set (CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} --std=c++11")
-set (CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -Wall -Wextra -Werror=implicit-function-declaration -Wstrict-overflow=5")
-set (CMAKE_CXX_FLAGS_DEBUG "-O0 -g")
-set (CMAKE_CXX_FLAGS_RELWITHDEBINFO "-O2 -g")
-set (CMAKE_CXX_FLAGS_RELEASE "-O3")
+add_library(src_hello hello.c)
+target_link_libraries("${binary_name}" src_hello)

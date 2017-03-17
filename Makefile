@@ -6,17 +6,19 @@ RUN_COMMAND = "./src/myproject"
 
 MAKE = make
 CMAKE = cmake
+TEST_COMMAND = env CTEST_OUTPUT_ON_FAILURE=true $(MAKE) --no-print-directory test
+# To always print test output (not only on failure), change `CTEST_OUTPUT_ON_FAILURE=true` to `ARGS=--verbose`.
 
 default:
-ifneq ("$(wildcard $(BUILD_DIR))","") # If $(BUILD_DIR) exists...
-	cd "$(BUILD_DIR)" && $(MAKE)
-else
-	mkdir "$(BUILD_DIR)" && cd "$(BUILD_DIR)" && $(CMAKE) .. && $(MAKE)
-endif
+	mkdir -p "$(BUILD_DIR)" && cd "$(BUILD_DIR)" && $(CMAKE) .. && $(MAKE) --no-print-directory
 
 .PHONY: run
-run:
+run: default
 	cd "$(BUILD_DIR)" && $(RUN_COMMAND)
+
+.PHONY: test
+test: default
+	cd "$(BUILD_DIR)" && $(TEST_COMMAND)
 
 .PHONY: clean
 clean:
