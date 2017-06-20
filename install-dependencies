@@ -1,0 +1,25 @@
+#!/usr/bin/env sh
+
+fatal_error() {
+    printf "ERROR: %s\n" "$1" 1>&2
+    exit "${2-1}"
+}
+
+require_root_privileges() {
+    if [ "$(id -u)" -ne 0 ]; then
+        fatal_error "This script must be run with root privileges."
+    fi
+}
+
+require_cmd_present() {
+    for cmd in "$@"; do
+        if ! command -v -- "$1" >/dev/null 2>&1; then
+            fatal_error "Required command \`$cmd\` not found."
+        fi
+    done
+}
+
+require_cmd_present "apt-get"
+require_root_privileges
+
+apt-get install make cmake libcmocka-dev valgrind
