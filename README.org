@@ -6,6 +6,7 @@ The Makefile in the top-level directory is just a wrapper that runs CMake or Mak
 
 Replace =myproject= with the name of your project in =CMakeLists.txt= and =Makefile=. Then use the following commands:
 
+- =./install-dependencies= :: Install dependencies. Currently only Debian-based systems are supported.
 - =make= :: Ensure the =build= directory exists; run =cmake= and =make= there.
 - =make run= :: Run the program.
 - =make test= :: Run tests.
