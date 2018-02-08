@@ -18,6 +18,16 @@ set(CMAKE_BUILD_TYPE RelWithDebInfo) # Debug, RelWithDebInfo, Release.
 # Profiling.
 #set(CMAKE_C_FLAGS "${CMAKE_C_FLAGS} -pg")
 
+# Sanitizers (like Valgrind, but compile-time).
+set(sanitizers_enable_debug TRUE)
+if(sanitizers_enable_debug)
+  # Each of these sanitizers will increase memory usage and processing time about 2x.
+  set(sanitizer_flags_debug "-fsanitize=address,leak,memory,undefined")
+else()
+  set(sanitizer_flags_debug "")
+endif()
+set(CMAKE_EXE_LINKER_FLAGS_DEBUG "${CMAKE_EXE_LINKER_FLAGS} ${sanitizer_flags_debug}")
+
 # Static linking.
 set(build_static FALSE)
 if(build_static)
@@ -29,13 +39,13 @@ endif()
 # Compilation flags.
 set(CMAKE_C_FLAGS "${CMAKE_C_FLAGS} --std=c99")
 set(CMAKE_C_FLAGS "${CMAKE_C_FLAGS} -Wall -Wextra -Werror=implicit-function-declaration")
-set(CMAKE_C_FLAGS_DEBUG "-O0 -g")
+set(CMAKE_C_FLAGS_DEBUG "-g ${sanitizer_flags_debug}")
 set(CMAKE_C_FLAGS_RELWITHDEBINFO "-O2 -g -DNDEBUG")
 set(CMAKE_C_FLAGS_RELEASE "-O3 -DNDEBUG")
 # Compilation flags for C++.
 #set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} --std=c++11")
 #set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -Wall -Wextra -Werror=implicit-function-declaration")
-#set(CMAKE_CXX_FLAGS_DEBUG "-O0 -g")
+#set(CMAKE_CXX_FLAGS_DEBUG "-g ${sanitizer_flags_debug}")
 #set(CMAKE_CXX_FLAGS_RELWITHDEBINFO "-O2 -g -NDEBUG")
 #set(CMAKE_CXX_FLAGS_RELEASE "-O3 -NDEBUG")
 
