@@ -1,6 +1,7 @@
 add_definitions(-DTEST)
 include_directories("${PROJECT_SOURCE_DIR}/src")
 
+set(valgrind_enable FALSE)
 set(valgrind_flags --error-exitcode=1 --read-var-info=yes --leak-check=full --show-leak-kinds=all)
 
 set(tests_to_add) # We collect the tests to add and add them later in order to run the non-Valgrind ones first (because they're much faster).
@@ -15,6 +16,9 @@ add_test_dwim(test_hello src_hello)
 foreach(name ${tests_to_add})
   add_test("${name}" "./${name}")
 endforeach()
-foreach(name ${tests_to_add})
-  add_test("${name}_valgrind" valgrind ${valgrind_flags} "./${name}")
-endforeach()
+
+if(valgrind_enable)
+  foreach(name ${tests_to_add})
+    add_test("${name}_valgrind" valgrind ${valgrind_flags} "./${name}")
+  endforeach()
+endif()
