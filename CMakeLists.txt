@@ -30,14 +30,14 @@ endif()
 set(CMAKE_C_FLAGS "${CMAKE_C_FLAGS} --std=c99")
 set(CMAKE_C_FLAGS "${CMAKE_C_FLAGS} -Wall -Wextra -Werror=implicit-function-declaration")
 set(CMAKE_C_FLAGS_DEBUG "-O0 -g")
-set(CMAKE_C_FLAGS_RELWITHDEBINFO "-O2 -g")
-set(CMAKE_C_FLAGS_RELEASE "-O3")
+set(CMAKE_C_FLAGS_RELWITHDEBINFO "-O2 -g -DNDEBUG")
+set(CMAKE_C_FLAGS_RELEASE "-O3 -DNDEBUG")
 # Compilation flags for C++.
 #set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} --std=c++11")
 #set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -Wall -Wextra -Werror=implicit-function-declaration")
 #set(CMAKE_CXX_FLAGS_DEBUG "-O0 -g")
-#set(CMAKE_CXX_FLAGS_RELWITHDEBINFO "-O2 -g")
-#set(CMAKE_CXX_FLAGS_RELEASE "-O3")
+#set(CMAKE_CXX_FLAGS_RELWITHDEBINFO "-O2 -g -NDEBUG")
+#set(CMAKE_CXX_FLAGS_RELEASE "-O3 -NDEBUG")
 
 # Enable modern UNIX features.
 #add_definitions(-D_POSIX_C_SOURCE=200809L)
