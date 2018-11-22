@@ -15,6 +15,9 @@ project("myproject")
 set(CMAKE_BUILD_TYPE RelWithDebInfo) # Debug, RelWithDebInfo, Release.
 #set(CMAKE_VERBOSE_MAKEFILE TRUE)
 
+# Create compile_commands.json.
+set(CMAKE_EXPORT_COMPILE_COMMANDS TRUE)
+
 # Profiling.
 #set(CMAKE_C_FLAGS "${CMAKE_C_FLAGS} -pg")
 
