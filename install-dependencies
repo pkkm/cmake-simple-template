@@ -1,7 +1,7 @@
 #!/usr/bin/env sh
 
 fatal_error() {
-    printf "ERROR: %s\n" "$1" 1>&2
+    printf "ERROR: %s\\n" "$1" 1>&2
     exit "${2-1}"
 }
 
